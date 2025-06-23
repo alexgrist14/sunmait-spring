@@ -1,0 +1,103 @@
+:root {
+  --bg: #1b1f23;
+  --color: #fff;
+  --border: #2b2f33;
+  --fc-border-color: #2b2f33;
+  --fc-page-bg-color: #1b1f23;
+  --fc-today-bg-color: #2b2f33;
+  --salad: #6cb52d;
+}
+
+body,
+html {
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--bg);
+  color: var(--color);
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.header {
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  width: 100%;
+  max-width: 1152px;
+  min-height: 3.25rem;
+}
+
+.navbar__brand{
+    padding: .5rem .75rem;
+}
+
+.navbar__menu {
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: Metropolis, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  gap: 40px;
+}
+
+.navbar__item {
+  position: relative;
+}
+
+.navbar__item span {
+}
+
+.navbar__item span::after {
+  border: 3px solid transparent;
+  border-radius: 2px;
+  border-right: 0;
+  border-top: 0;
+  content: " ";
+  display: block;
+  height: 0.625em;
+  margin-top: -0.4375em;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  border-bottom: 2px solid #111;
+  border-left: 2px solid #111;
+  border-radius: 1px;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-bottom-color: var(--color);
+  border-left-color: var(--color);
+  right: -18px;
+}
+
+.logo {
+  width: 300px;
+  fill: var(--color);
+}
+
+.st0{
+    fill: var(--salad);
+}
+
+.st1{
+fill: var(--color);
+}
+
+.st3{
+   fill: var(--color); 
+}
+
+
+svg {
+  color: var(--color);
+}
