@@ -1,13 +1,34 @@
 @font-face {
-    font-family: 'Metropolis';
-    src: url('fonts/metropolis-regular-webfont.woff2') format('woff2');
+    font-family: Metropolis;
+    src: url('../fonts/metropolis-regular-webfont.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Metropolis';
-    src: url('fonts/metropolis-bold-webfont.woff2') format('woff2');
+    font-family: Metropolis;
+    src: url('../fonts/metropolis-bold-webfont.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Metropolis;
+    src: url('../fonts/metropolis-extrabold-webfont.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url('../fonts/open-sans-v17-latin-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url('../fonts/open-sans-v17-latin-700.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
