@@ -2,6 +2,12 @@
   background: #262a2d;
 }
 
+@media screen and (max-width: 965px) {
+  .main__top {
+    padding-top: 64px;
+  }
+}
+
 h1 {
   font-family: Metropolis, sans-serif;
   font-size: 3.5rem;
