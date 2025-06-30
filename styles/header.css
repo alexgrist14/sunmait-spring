@@ -169,8 +169,8 @@
     height: 15px;
   }
 
-  .navbar__item:hover{
-    color: var(--salad);
+  .navbar__menu{
+    gap: 5px;
   }
 
     .navbar__item.opened span::after{
@@ -245,12 +245,15 @@ svg {
     padding: 0;
     opacity: 0;
     transform: translateY(0);
-    pointer-events: all;
+
     transition: none;
   }
-
+  .navbar__item span:hover{
+color: var(--salad);
+  }
   .dropdown.opened{
     opacity: 1;
+    pointer-events: all;
     position: unset;
 
   }
