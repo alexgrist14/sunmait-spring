@@ -1,0 +1,21 @@
+.dropdown__item {
+  color: var(--color);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-block: 6px;
+  padding-inline: 16px 48px;
+}
+
+.dropdown__item:hover {
+  color: var(--salad);
+}
+
+
+@media screen and (max-width: 965px) {
+
+  .dropdown__item{
+    color: #98afae;
+    font-size: 1.2rem;
+    padding: .2rem 0;
+  }
+}
