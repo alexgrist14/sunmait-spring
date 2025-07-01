@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/alexgrist14/sunmait-spring#readme",
   "devDependencies": {
+    "@eslint/js": "^9.30.0",
+    "eslint": "^9.30.0",
+    "globals": "^16.2.0",
     "prettier": "3.6.0"
   }
 }
