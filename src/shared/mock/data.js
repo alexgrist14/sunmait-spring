@@ -1,80 +1,4 @@
-const renderNavMenu = (containerSelector, items) => {
-  const container = document.querySelector(containerSelector);
-  if (!container) return;
-
-  let html = "";
-
-  items.forEach((item) => {
-    html += `
-      <div class="navbar__item">
-        <span>${item.title}</span>
-        ${item.dropdown.length ? renderDropdown(item.dropdown) : ""}
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-};
-
-const renderDropdown = (items) => {
-  return `
-    <ul class="dropdown">
-      ${items
-        .map(
-          (item) => `
-        <li>
-          <a 
-            class="dropdown__item" 
-            href="${item.href}" 
-          >
-            ${item.text}
-          </a>
-        </li>
-      `
-        )
-        .join("")}
-    </ul>
-  `;
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderNavMenu(".navbar__menu", navItemsData);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const navItems = document.querySelectorAll(".navbar__item");
-
-  navItems.forEach((item) => {
-    const title = item.querySelector("span");
-    const dropdown = item.querySelector("ul");
-
-    if (title && dropdown) {
-      title.addEventListener("click", (e) => {
-        const isOpened = item.classList.contains("opened");
-        e.stopPropagation();
-
-        navItems.forEach((otherItem) => {
-          if (otherItem !== item) {
-            console.log("deleted");
-
-            otherItem.classList.remove("opened");
-            otherItem.querySelector("ul")?.classList.remove("opened");
-          }
-        });
-
-        if (!isOpened) {
-          item.classList.add("opened");
-          dropdown.classList.add("opened");
-        } else {
-          item.classList.remove("opened");
-          dropdown.classList.remove("opened");
-        }
-      });
-    }
-  });
-});
-
-const navItemsData = [
+export const navItemsData = [
   {
     title: "Why Spring",
     dropdown: [
@@ -143,11 +67,59 @@ const navItemsData = [
   },
 ];
 
-const burger = document.querySelector(".navbar__burger");
-
-burger.addEventListener("click", () => {
-  burger.classList.toggle("active");
-
-  const menu = document.querySelector(".navbar__menu");
-  menu.classList.toggle("open");
-});
+export const springProjectsData = [
+  {
+    title: "Spring Boot",
+    image: "assets/spring-boot.svg",
+    description:
+      "Takes an opinionated view of building Spring applications and gets you up and running as quickly as possible.",
+  },
+  {
+    title: "Spring Framework",
+    image: "assets/spring-framework.svg",
+    description:
+      "Provides core support for dependency injection, transaction management, web apps, data access, messaging, and more.",
+  },
+  {
+    title: "Spring Data",
+    image: "assets/spring-data.svg",
+    description:
+      "Provides a consistent approach to data access – relational, non-relational, map-reduce, and beyond.",
+  },
+  {
+    title: "Spring Cloud",
+    image: "assets/spring-cloud.svg",
+    description:
+      "Provides a set of tools for common patterns in distributed systems. Useful for building and deploying microservices.",
+  },
+  {
+    title: "Spring Cloud Data Flow",
+    image: "assets/spring-data-flow.svg",
+    description:
+      "Provides an orchestration service for composable data microservice applications on modern runtimes.",
+  },
+  {
+    title: "Spring Security",
+    image: "assets/spring-security.svg",
+    description:
+      "Protects your application with comprehensive and extensible authentication and authorization support.",
+  },
+  {
+    title: "Spring Authorization",
+    image: "assets/spring-authorization-server.svg",
+    description:
+      "Provides a secure, light-weight, and customizable foundation for building OpenID Connect 1.0 Identity Providers and OAuth2 Authorization Server products.",
+  },
+  {
+    title: "Spring for GraphQL",
+    image: "assets/spring-graphql.svg",
+    description:
+      "Spring for GraphQL provides support for Spring applications built on GraphQL Java.",
+  },
+  {
+    title: "Spring Session",
+    image: "assets/spring-security.svg",
+    description:
+      "Protects your application with comprehensive and extensible authentication and authorization support.",
+  },
+];
