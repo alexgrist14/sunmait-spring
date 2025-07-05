@@ -1,12 +1,13 @@
 import styles from "./Input.module.css";
 
-const Input = ({ placeholder, onChange }) => {
+const Input = ({ id, placeholder, onChange, type = "text" }, value) => {
   return (
     <input
-      type="text"
+      type={type}
+      value={value}
       className={styles.search__input}
       placeholder={placeholder}
-      id="projectSearch"
+      id={id}
       onChange={onChange}
     />
   );
