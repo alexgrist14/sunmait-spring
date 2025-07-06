@@ -11,7 +11,7 @@ import Login from "./pages/Auth/Login.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/sunmait-spring/">
+      <BrowserRouter basename={import.meta.env.PROD ? "/sunmait-spring/" : "/"}>
         <Routes>
           <Route
             path="/"

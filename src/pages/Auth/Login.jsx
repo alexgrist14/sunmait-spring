@@ -56,10 +56,10 @@ const Login = () => {
             }}
           />
         </div>
-        {error && <div className={styles.error}>{error}</div>}
         <Button color={"green"} className={styles.button}>
           Log In
         </Button>
+        {error && <div className={styles.error}>{error}</div>}
       </form>
     </div>
   );

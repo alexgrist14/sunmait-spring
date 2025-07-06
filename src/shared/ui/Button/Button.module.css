@@ -3,11 +3,9 @@
 }
 
 .button {
-  border-color: var(--color);
   color: var(--color);
-  border: 2px solid;
-
   display: inline-block;
+  border: 0;
   font-size: 14.4px;
   font-weight: 600;
   height: auto;
@@ -20,6 +18,9 @@
 }
 
 .button_whiteColor{
+  border-color: var(--color);
+  border: 2px solid;
+
   background: transparent;
   border-radius: 0;
   text-transform: uppercase;
@@ -54,4 +55,8 @@
 
 .button_greenColor{
   background-color: var(--salad);
+}
+
+.button_greenColor:active{
+  background-color: #5e9e25;
 }
