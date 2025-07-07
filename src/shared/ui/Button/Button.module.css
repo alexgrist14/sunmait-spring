@@ -2,20 +2,10 @@
   padding-top: 1rem;
 }
 
-.button:hover {
-  cursor: pointer;
-
-  color: var(--bg);
-  border-color: var(--color);
-}
-
 .button {
-  border-color: var(--color);
-  background: transparent;
   color: var(--color);
-  border: 2px solid;
-  border-radius: 0;
   display: inline-block;
+  border: 0;
   font-size: 14.4px;
   font-weight: 600;
   height: auto;
@@ -23,12 +13,29 @@
   overflow: hidden;
   padding: 15px 30px;
   position: relative;
-  text-transform: uppercase;
   transition: color 0.2s ease-in-out;
   z-index: 0;
 }
 
-.button::before {
+.button_whiteColor{
+  border-color: var(--color);
+  border: 2px solid;
+
+  background: transparent;
+  border-radius: 0;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button_whiteColor:hover{
+  color: var(--bg);
+  border-color: var(--color);
+}
+
+.button_whiteColor::before{
   background-color: var(--color);
   bottom: 0;
   content: "";
@@ -41,7 +48,15 @@
   z-index: -1;
 }
 
-.button:hover::before {
-  color: black;
+.button_whiteColor:hover::before{
+    color: black;
   transform: translateX(0);
+}
+
+.button_greenColor{
+  background-color: var(--salad);
+}
+
+.button_greenColor:active{
+  background-color: #5e9e25;
 }

@@ -1,5 +1,7 @@
 import classNames from "classnames";
-import { useState, useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate } from "react-router";
 import styles from "./Home.module.css";
 import { springProjectsData } from "../../shared/mock/data";
 import Tile from "../../shared/ui/Tile/Tile";
@@ -8,8 +10,10 @@ import Input from "../../shared/ui/Input/Input";
 import debounce from "../../shared/utils/debounce";
 
 const Home = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { isAuthenticated } = useSelector((state) => state);
+  const navigate = useNavigate();
 
+  const [searchTerm, setSearchTerm] = useState("");
   const filteredProjects = useMemo(() => {
     if (!searchTerm) return springProjectsData;
 
@@ -21,6 +25,12 @@ const Home = () => {
     );
   }, [searchTerm]);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
+
   const handleSearch = debounce((value) => {
     setSearchTerm(value);
   }, 300);
@@ -28,6 +38,7 @@ const Home = () => {
   const handleInputChange = (e) => {
     handleSearch(e.target.value);
   };
+
   return (
     <main className={styles.main}>
       <div className={styles.main__top}>
@@ -39,7 +50,7 @@ const Home = () => {
             Project to help you build it. Start small and use just what you
             need—Spring is modular by design.
           </div>
-          <Button>Release Calendar</Button>
+          <Button color={"white"}>Release Calendar</Button>
         </div>
         <div className={styles.line}></div>
       </div>
@@ -47,6 +58,7 @@ const Home = () => {
         <div className={classNames(styles.projects, "container")}>
           <div className={styles.search__container}>
             <Input
+              id={"searchProjects"}
               placeholder={"Search projects..."}
               onChange={handleInputChange}
             />
