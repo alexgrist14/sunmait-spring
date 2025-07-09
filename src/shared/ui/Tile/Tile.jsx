@@ -6,7 +6,7 @@ const Tile = ({ project }) => {
       <div className={styles.item}>
         <div className={styles.item__header}>
           <div className={styles.image}>
-            <img src={project.image} alt={project.title} />
+            <img src={project.imageUrl} alt={project.title} />
           </div>
           <h2>{project.title}</h2>
         </div>
