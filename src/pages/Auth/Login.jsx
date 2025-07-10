@@ -4,14 +4,15 @@ import { useNavigate } from "react-router";
 import styles from "./Login.module.css";
 import Button from "../../shared/ui/Button/Button";
 import Input from "../../shared/ui/Input/Input";
+import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, error } = useSelector((state) => state);
 
-  const [localLogin, setLocalLogin] = useState("");
-  const [localPassword, setLocalPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -19,14 +20,20 @@ const Login = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  const auth = () => {
+    axios
+      .post("http://localhost:3111/api/login", {
+        username: username,
+        password: password,
+      })
+      .then(() => dispatch({ type: "LOGIN_SUCCESS" }))
+      .catch(() => dispatch({ type: "LOGIN_FAILURE" }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (localLogin === "admin" && localPassword === "1234") {
-      dispatch({ type: "LOGIN_SUCCESS" });
-    } else {
-      dispatch({ type: "LOGIN_FAILURE" });
-    }
+    auth();
   };
 
   return (
@@ -37,9 +44,9 @@ const Login = () => {
           <Input
             id="login"
             type="text"
-            value={localLogin}
+            value={username}
             onChange={(e) => {
-              setLocalLogin(e.target.value);
+              setUsername(e.target.value);
               dispatch({ type: "SET_LOGIN", payload: e.target.value });
             }}
           />
@@ -49,9 +56,9 @@ const Login = () => {
           <Input
             id="password"
             type="password"
-            value={localPassword}
+            value={password}
             onChange={(e) => {
-              setLocalPassword(e.target.value);
+              setPassword(e.target.value);
               dispatch({ type: "SET_PASSWORD", payload: e.target.value });
             }}
           />

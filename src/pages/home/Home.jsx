@@ -3,33 +3,42 @@ import { useSelector } from "react-redux";
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router";
 import styles from "./Home.module.css";
-import { springProjectsData } from "../../shared/mock/data";
 import Tile from "../../shared/ui/Tile/Tile";
 import Button from "../../shared/ui/Button/Button";
 import Input from "../../shared/ui/Input/Input";
 import debounce from "../../shared/utils/debounce";
+import axios from "axios";
 
 const Home = () => {
+  const [projects, setProjects] = useState([]);
   const { isAuthenticated } = useSelector((state) => state);
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
   const filteredProjects = useMemo(() => {
-    if (!searchTerm) return springProjectsData;
+    if (!searchTerm) return projects;
 
     const term = searchTerm.toLowerCase();
-    return springProjectsData.filter(
+    return projects.filter(
       (project) =>
         project.title.toLowerCase().includes(term) ||
         project.description.toLowerCase().includes(term)
     );
-  }, [searchTerm]);
+  }, [projects, searchTerm]);
+
+  const getProjects = () => {
+    axios
+      .get("http://localhost:3111/api/projects")
+      .then((res) => setProjects(res.data.data));
+  };
 
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
     }
-  }, [isAuthenticated, navigate]);
+
+    getProjects();
+  }, [isAuthenticated, navigate, searchTerm]);
 
   const handleSearch = debounce((value) => {
     setSearchTerm(value);
