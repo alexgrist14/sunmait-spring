@@ -112,6 +112,11 @@ h4 {
   width: auto;
 }
 
+a{
+  text-decoration: none;
+  color: rgb(78, 78, 230);
+}
+
 @media screen and (min-width: 1216px) {
   .container:not(.is-max-desktop) {
     max-width: 1152px;

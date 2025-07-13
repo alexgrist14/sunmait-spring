@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router";
 import styles from "./Home.module.css";
@@ -7,10 +7,12 @@ import Tile from "../../shared/ui/Tile/Tile";
 import Button from "../../shared/ui/Button/Button";
 import Input from "../../shared/ui/Input/Input";
 import debounce from "../../shared/utils/debounce";
-import axios from "axios";
+import { checkAuth, authAxios } from "../../shared/utils/auth";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state);
   const navigate = useNavigate();
 
@@ -27,18 +29,23 @@ const Home = () => {
   }, [projects, searchTerm]);
 
   const getProjects = () => {
-    axios
-      .get("http://localhost:3111/api/projects")
-      .then((res) => setProjects(res.data.data));
+    authAxios.get("/projects").then((res) => setProjects(res.data.data));
   };
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    const initialize = async () => {
+      await checkAuth(dispatch);
+      setLoading(false);
+      getProjects();
+    };
+    initialize();
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
       navigate("/login");
     }
-
-    getProjects();
-  }, [isAuthenticated, navigate, searchTerm]);
+  }, [loading, isAuthenticated, navigate]);
 
   const handleSearch = debounce((value) => {
     setSearchTerm(value);
