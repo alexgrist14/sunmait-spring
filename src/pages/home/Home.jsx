@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import styles from "./Home.module.css";
 import Tile from "../../shared/ui/Tile/Tile";
@@ -16,20 +16,8 @@ const Home = () => {
   const { isAuthenticated } = useSelector((state) => state);
   const navigate = useNavigate();
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const filteredProjects = useMemo(() => {
-    if (!searchTerm) return projects;
-
-    const term = searchTerm.toLowerCase();
-    return projects.filter(
-      (project) =>
-        project.title.toLowerCase().includes(term) ||
-        project.description.toLowerCase().includes(term)
-    );
-  }, [projects, searchTerm]);
-
   const getProjects = () => {
-    authAxios.get("/projects").then((res) => setProjects(res.data.data));
+    authAxios.get("/projects").then((res) => setProjects(res.data.projects));
   };
 
   useEffect(() => {
@@ -48,7 +36,9 @@ const Home = () => {
   }, [loading, isAuthenticated, navigate]);
 
   const handleSearch = debounce((value) => {
-    setSearchTerm(value);
+    authAxios
+      .get(`/projects?search=${value}`)
+      .then((res) => setProjects(res.data.projects));
   }, 300);
 
   const handleInputChange = (e) => {
@@ -80,10 +70,8 @@ const Home = () => {
             />
           </div>
           <div className={styles.list}>
-            {filteredProjects.length > 0 ? (
-              filteredProjects.map((item) => (
-                <Tile key={item.title} project={item} />
-              ))
+            {projects.length > 0 ? (
+              projects.map((item) => <Tile key={item.title} project={item} />)
             ) : (
               <div className={styles.no_results}>No results</div>
             )}
