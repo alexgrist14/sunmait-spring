@@ -3,13 +3,13 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
 }
 
 .error {
   color: #ff3333;
   font-size: 0.8rem;
   margin-top: 0.25rem;
+  min-height: 2em;
   width: 200px;
   text-wrap: wrap;
 }

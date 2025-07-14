@@ -7,25 +7,19 @@ import Button from "../../../shared/ui/Button/Button";
 import FormField from "../../../shared/ui/FormField/FormField";
 
 const SignUp = () => {
+  const formFields = {
+    username: "",
+    password: "",
+    repeatPassword: "",
+    firstName: "",
+    lastName: "",
+    age: "",
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state);
-  const [errors, setErrors] = useState({
-    username: "",
-    password: "",
-    repeatPassword: "",
-    firstName: "",
-    lastName: "",
-    age: "",
-  });
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    repeatPassword: "",
-    firstName: "",
-    lastName: "",
-    age: "",
-  });
+  const [errors, setErrors] = useState(formFields);
+  const [formData, setFormData] = useState(formFields);
 
   useEffect(() => {
     if (isAuthenticated) {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_URL = "http://localhost:3111/api";
+const API_URL = "https://sunmait.mooncellar.space/api";
 
 export const setAuthTokens = (accessToken, refreshToken) => {
   Cookies.set("accessToken", accessToken, { expires: 1 });

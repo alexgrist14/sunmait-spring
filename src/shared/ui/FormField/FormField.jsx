@@ -22,7 +22,7 @@ const FormField = ({
           onChange={onChange}
           hasError={!!error}
         />
-        {error && <div className={styles.error}>{error}</div>}
+        <div className={styles.error}>{error || " "}</div>
       </div>
     </div>
   );
