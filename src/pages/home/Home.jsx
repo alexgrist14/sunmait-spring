@@ -17,7 +17,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   const getProjects = () => {
-    authAxios.get("/projects").then((res) => setProjects(res.data.projects));
+    authAxios.get("/projects").then((res) => {
+      setProjects(res.data.projects);
+    });
   };
 
   useEffect(() => {

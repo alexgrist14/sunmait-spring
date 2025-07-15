@@ -58,13 +58,6 @@ export const navItemsData = [
       { text: "Authors", href: "/authors" },
     ],
   },
-  {
-    title: "Tanzu Spring",
-    dropdown: [
-      { text: "Tanzu", href: "/community" },
-      { text: "Spring", href: "/events" },
-    ],
-  },
 ];
 
 export const springProjectsData = [
