@@ -2,7 +2,7 @@ let initialState = {
   login: "",
   password: "",
   isAuthenticated: false,
-  error: "",
+  isRefreshingToken: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -11,28 +11,29 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         login: action.payload,
-        error: "",
       };
     case "SET_PASSWORD":
       return {
         ...state,
         password: action.payload,
-        error: "",
       };
     case "LOGIN_SUCCESS":
       return {
         ...state,
         isAuthenticated: true,
-        error: "",
       };
     case "LOGIN_FAILURE":
       return {
         ...state,
         isAuthenticated: false,
-        error: "Incorrect user or password",
       };
     case "LOGOUT":
       return initialState;
+    case "SET_REFRESHING_TOKEN":
+      return {
+        ...state,
+        isRefreshingToken: action.payload,
+      };
     default:
       return state;
   }

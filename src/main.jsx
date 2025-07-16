@@ -6,7 +6,8 @@ import Home from "./pages/home/Home.jsx";
 import { Provider } from "react-redux";
 import store from "./shared/store/store.js";
 import { BrowserRouter, Route, Routes } from "react-router";
-import Login from "./pages/Auth/Login.jsx";
+import Login from "./pages/Auth/Login/Login.jsx";
+import SignUp from "./pages/Auth/SignUp/SignUp.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -21,7 +22,8 @@ createRoot(document.getElementById("root")).render(
               </Layout>
             }
           ></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </Provider>

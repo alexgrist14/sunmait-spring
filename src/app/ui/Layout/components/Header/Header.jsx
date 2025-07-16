@@ -5,10 +5,16 @@ import styles from "./Header.module.css";
 import { navItemsData } from "../../../../../shared/mock/data";
 import Dropdown from "../../../../../shared/ui/Dropdown/Dropdown";
 import classNames from "classnames";
+import Button from "../../../../../shared/ui/Button/Button";
+import { removeAuthTokens } from "../../../../../shared/utils/auth";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const [openedItem, setOpenedItem] = useState(null);
   const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleItemClick = (index, e) => {
     e.stopPropagation();
@@ -18,6 +24,12 @@ const Header = () => {
     } else {
       setOpenedItem(index);
     }
+  };
+
+  const handleLogout = () => {
+    removeAuthTokens();
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
   };
 
   return (
@@ -48,6 +60,13 @@ const Header = () => {
               />
             </div>
           ))}
+          <Button
+            className={styles.button}
+            color="green"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </div>
         <div
           className={classNames(styles.navbar__burger, {

@@ -1,10 +1,7 @@
-.container {
-  padding-top: 1rem;
-}
-
 .button {
   color: var(--color);
   display: inline-block;
+  padding-top: 1rem;
   border: 0;
   font-size: 14.4px;
   font-weight: 600;

@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import styles from "./Login.module.css";
-import Button from "../../shared/ui/Button/Button";
-import Input from "../../shared/ui/Input/Input";
-import axios from "axios";
+import Button from "../../../shared/ui/Button/Button";
+import Input from "../../../shared/ui/Input/Input";
+import { authAxios, setAuthTokens } from "../../../shared/utils/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, error } = useSelector((state) => state);
+  const [error, setError] = useState("");
+  const { isAuthenticated } = useSelector((state) => state);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,20 +21,31 @@ const Login = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const auth = () => {
-    axios
-      .post("http://localhost:3111/api/login", {
-        username: username,
-        password: password,
-      })
-      .then(() => dispatch({ type: "LOGIN_SUCCESS" }))
-      .catch(() => dispatch({ type: "LOGIN_FAILURE" }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    auth();
+    try {
+      const response = await authAxios.post("/login", {
+        username,
+        password,
+      });
+
+      const { accessToken, refreshToken } = response.data;
+      setAuthTokens(accessToken, refreshToken);
+
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: { username },
+      });
+
+      navigate("/");
+    } catch (error) {
+      setError(error.response?.data?.message);
+      dispatch({
+        type: "LOGIN_FAILURE",
+        payload: error.response?.data?.message,
+      });
+    }
   };
 
   return (
@@ -67,6 +79,9 @@ const Login = () => {
           Log In
         </Button>
         {error && <div className={styles.error}>{error}</div>}
+        <div className={styles.switch}>
+          Don’t have an account? <Link to="/signup">Sign up</Link>
+        </div>
       </form>
     </div>
   );
